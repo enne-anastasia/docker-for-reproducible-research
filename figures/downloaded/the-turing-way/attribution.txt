@@ -1,0 +1,3 @@
+reproducible-definitiongrid.jpg: The Turing Way Community. This illustration is
+  created by Scriberia with The Turing Way community, used under a CC-BY 4.0 
+  licence. DOI: 10.5281/zenodo.3332807

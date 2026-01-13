@@ -1,0 +1,4 @@
+Docker_(container_engine)_logo_(cropped).png: dotCloud, Inc., Apache License 2.0 http://www.apache.org/licenses/LICENSE-2.0, via Wikimedia Commons
+docker_file.png: <a href="https://www.flaticon.com/free-icons/docker" title="docker icons">Docker icons created by Afian Rochmah Afif - Flaticon</a>
+docker_image.png: <a href="https://www.flaticon.com/free-icons/docker" title="docker icons">Docker icons created by Freepik - Flaticon</a>
+docker_container.png: <a href="https://www.flaticon.com/free-icons/container" title="container icons">Container icons created by Freepik - Flaticon</a>

@@ -1,29 +1,112 @@
----
-title: "Docker for Reproducible Research"
-author: Anastasiia Enne
-date: Group meeting, 14.01.2026
-output:
-  beamer_presentation:
-    keep_tex: true
-    citation_package: biblatex
-    theme: CambridgeUS
-    fonttheme: structurebold
-    fig_caption: true
-biblio-style: authoryear
-bibliography: bibliography.bib
-header-includes:
-  - \usepackage{float}
-  - \usepackage[para]{footmisc} % multiple footnotes in one line
-  - \renewcommand{\footnotesize}{\tiny}
-classoption: "aspectratio=169"
----
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+  aspectratio=169]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{CambridgeUS}
+\usefonttheme{structurebold}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\newif\ifbibliography
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{float}
+\usepackage[para]{footmisc} % multiple footnotes in one line
+\renewcommand{\footnotesize}{\tiny}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[style=authoryear,]{biblatex}
+\addbibresource{bibliography.bib}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Docker for Reproducible Research},
+  pdfauthor={Anastasiia Enne},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
+\title{Docker for Reproducible Research}
+\author{Anastasiia Enne}
+\date{Group meeting, 14.01.2026}
 
----
+\begin{document}
+\frame{\titlepage}
 
+\begin{frame}
 \frametitle{Overview}
 
 \begin{enumerate}
@@ -31,10 +114,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \item \textbf{What is Docker} and how can it help us with reproducibility
   \item \textbf{Dockerizing an existing project} --- a step-by-step guide if you want to try Docker
 \end{enumerate}
+\end{frame}
 
-***
-
-
+\begin{frame}
 \frametitle{Reproducibility crisis}
 
 \begin{columns}
@@ -60,9 +142,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \only<1->{\footnotetext[1]{The Turing Way Community. This illustration is created by Scriberia with The Turing Way community, used under a CC-BY 4.0 licence. DOI: \textcolor{magenta}{\href{https://doi.org/10.5281/zenodo.3332807}{10.5281/zenodo.3332807}}}}
   \only<3->{\footnotetext[2]{\parencite{baker_1500_2016}}}
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{Reproducibility crisis in modelling studies?}
 
 \begin{columns}
@@ -91,9 +173,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \only<4->{\footnotetext[2]{\parencite{tiwari_reproducibility_2021}}}
 
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{Reproducibility crisis in modelling studies!}
 
 \begin{columns}
@@ -133,9 +215,9 @@ knitr::opts_chunk$set(echo = FALSE)
 \footnotetext[1]{\parencite{boettiger_introduction_2015}}
   
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{Learning objectives}
 
 \begin{columns}
@@ -165,9 +247,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \end{column}
 
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{What is Docker?}
 
 \begin{block}{Main idea}
@@ -179,9 +261,9 @@ knitr::opts_chunk$set(echo = FALSE)
     \item<5-> Alice is certain that she provided all the dependencies, because she tested this file with the Docker software.
   \end{itemize}
 \end{block}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{What is Docker?}
 
 \begin{columns}
@@ -253,9 +335,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \end{column}
 
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{What is Docker?}
 \framesubtitle{More about Docker containers}
 
@@ -292,9 +374,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \end{column}
 
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{Dockerizing an existing project}
 \framesubtitle{What project are we going to Dockerize?}
 
@@ -323,9 +405,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \end{column}
 
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{Dockerizing an existing project}
 \framesubtitle{STEP 1: Installing Docker}
 
@@ -353,9 +435,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \end{column}
 
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{Dockerizing an existing project}
 \framesubtitle{STEP 2: Trying the basic Docker commands}
 
@@ -386,9 +468,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \end{column}
 
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{Dockerizing an existing project}
 \framesubtitle{STEP 2: Trying the basic Docker commands}
 
@@ -418,9 +500,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \end{column}
 
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{Dockerizing an existing project}
 \framesubtitle{STEP 3: Writing the Docker file}
 
@@ -447,9 +529,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \end{column}
 
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{Dockerizing an existing project}
 \framesubtitle{STEP 3: Writing the Docker file}
 
@@ -478,9 +560,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \end{column}
 
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{Dockerizing an existing project}
 \framesubtitle{STEP 3: Writing the Docker file}
 
@@ -505,9 +587,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \end{column}
 
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{Dockerizing an existing project}
 \framesubtitle{STEP 3: Writing the Docker file}
 
@@ -537,9 +619,9 @@ knitr::opts_chunk$set(echo = FALSE)
   \end{column}
 
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{Dockerizing an existing project}
 \framesubtitle{STEP 4: Building the image}
 
@@ -562,21 +644,28 @@ knitr::opts_chunk$set(echo = FALSE)
   \end{column}
 
 \end{columns}
+\end{frame}
 
-***
-
+\begin{frame}
 \frametitle{Dockerizing an existing project}
 \framesubtitle{STEP 5: Testing your container}
 
-  \texttt{sudo docker run -v \$(pwd)/figures:/docker\_reproducibility/figures -v \$(pwd)/docs:/docker\_reproducibility/docs <TAG\_NAME>}
-  
-***
+\texttt{sudo docker run -v \$(pwd)/figures:/docker\_reproducibility/figures -v \$(pwd)/docs:/docker\_reproducibility/docs <TAG\_NAME>}
+\end{frame}
 
+\begin{frame}
 \frametitle{Dockerizing an existing project}
 \framesubtitle{STEP 5: Testing your container}
 
-  \begin{overprint}
+\begin{overprint}
     \centering
     \onslide<1>\includegraphics[width=0.5\textwidth]{../figures/screenshots/docker_run.png}
   \end{overprint}
+\end{frame}
 
+\begin{frame}[allowframebreaks]{}
+  \bibliographytrue
+  \printbibliography[heading=none]
+\end{frame}
+
+\end{document}
