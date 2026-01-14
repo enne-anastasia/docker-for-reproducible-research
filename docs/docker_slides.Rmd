@@ -279,7 +279,7 @@ knitr::opts_chunk$set(echo = FALSE)
     \begin{itemize}
       \item<2-> Consequently, you need to either
       \begin{itemize}
-        \item<2-> copy your files into the container (with a command in your Docker file), or
+        \item<2-> copy your files into the image (with a command in your Docker file), or
         \item<2-> mount a folder to a container (during \texttt{docker run})
       \end{itemize}
       \item<3-> The rule of thumb is:
@@ -516,7 +516,7 @@ knitr::opts_chunk$set(echo = FALSE)
   \begin{column}{0.45\textwidth}
     \begin{enumerate}
       \setcounter{enumi}{4}
-      \item<1-> Copy the source code into the container
+      \item<1-> Copy the source code into the image
       \begin{itemize}
         \item<1-> The inside of the container is an Ubuntu file system with installed dependencies, therefore I copy everything into a separate folder to keep things neat.
       \end{itemize}

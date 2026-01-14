@@ -1,18 +1,16 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
   ignorenonframetext,
   aspectratio=169]{beamer}
+\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
+% remove section numbering
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -21,16 +19,19 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -43,7 +44,6 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
-\usepackage{amsmath,amssymb}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -56,7 +56,7 @@
 \fi
 \usepackage{lmodern}
 \usetheme[]{CambridgeUS}
-\usefonttheme{structurebold}
+\usefonttheme[]{structurebold}
 \ifPDFTeX\else
   % xetex/luatex font selection
 \fi
@@ -76,21 +76,15 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\newif\ifbibliography
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage[style=authoryear,]{biblatex}
+\addbibresource{bibliography.bib}
 \usepackage{float}
 \usepackage[para]{footmisc} % multiple footnotes in one line
 \renewcommand{\footnotesize}{\tiny}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\usepackage[style=authoryear,]{biblatex}
-\addbibresource{bibliography.bib}
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
@@ -361,7 +355,7 @@
     \begin{itemize}
       \item<2-> Consequently, you need to either
       \begin{itemize}
-        \item<2-> copy your files into the container (with a command in your Docker file), or
+        \item<2-> copy your files into the image (with a command in your Docker file), or
         \item<2-> mount a folder to a container (during \texttt{docker run})
       \end{itemize}
       \item<3-> The rule of thumb is:
@@ -598,7 +592,7 @@
   \begin{column}{0.45\textwidth}
     \begin{enumerate}
       \setcounter{enumi}{4}
-      \item<1-> Copy the source code into the container
+      \item<1-> Copy the source code into the image
       \begin{itemize}
         \item<1-> The inside of the container is an Ubuntu file system with installed dependencies, therefore I copy everything into a separate folder to keep things neat.
       \end{itemize}
