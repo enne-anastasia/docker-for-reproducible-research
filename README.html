@@ -353,8 +353,15 @@ display: none;
 
 
 <div id="docker-for-reproducible-research" class="section level1">
-<h1>docker-for-reproducible-research</h1>
-<p>Slides for my talk in Theoretical Biology group at Uni Beielefeld</p>
+<h1>Docker for reproducible research</h1>
+<p>This is a supporting repository for my talk on using Docker for
+reproducible research in Theoretical Biology group at Uni Beielefeld.
+The slides for the talk are available here in
+<code>docs/docker_slides.pdf</code>. They are build using Rmarkdown and
+LaTeX beamer.</p>
+<p>If you are already familiar with Docker, you can build and run the
+Docker container that produces the slides with the following
+commands:</p>
 <pre><code>sudo docker build -t dore ./</code></pre>
 <pre><code>sudo docker run -v $(pwd)/figures:/docker_reproducibility/figures -v $(pwd)/docs:/docker_reproducibility/docs dore</code></pre>
 </div>

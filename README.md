@@ -1,5 +1,12 @@
 # Docker for reproducible research
-Slides for my talk in Theoretical Biology group at Uni Beielefeld
+
+This is a supporting repository for my talk on using Docker for reproducible 
+research in Theoretical Biology group at Uni Beielefeld.
+The slides for the talk are available here in `docs/docker_slides.pdf`.
+They are build using Rmarkdown and LaTeX beamer.
+
+If you are already familiar with Docker, you can build and run the Docker container
+that produces the slides with the following commands:
 
 ```
 sudo docker build -t dore ./
